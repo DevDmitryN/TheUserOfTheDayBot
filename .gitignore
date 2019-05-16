@@ -1,0 +1,4 @@
+connectionString.txt
+*.class
+.idea
+target/
