@@ -54,9 +54,9 @@ public class Bot extends TelegramLongPollingBot {
 
     };
     //for DB
-    private String url = "jdbc:mysql://localhost:3306/chats_users_db";
-    private String login = "root";
-    private String password = "root";
+    private String URL = "jdbc:mysql://localhost:3306/chats_users_db";
+    private String LOGIN = "root";
+    private String PASSWORD = "root";
 
     /*method that gets a message
     * then handles it and does action according to command
@@ -95,7 +95,7 @@ public class Bot extends TelegramLongPollingBot {
 
 
     private void runGame(String chatId,Games game){
-        DBHandler dbHandler = new DBHandler(url,login,password);
+        DBHandler dbHandler = new DBHandler(URL, LOGIN, PASSWORD);
         List<UserForBD> usersInGame = dbHandler.getListOfPlayers(chatId);
         String[] messages;
         if (usersInGame.size() == 0) {
@@ -135,7 +135,7 @@ public class Bot extends TelegramLongPollingBot {
     }
     private void addUserInGame(String chatId, User user){
         try {
-            DBHandler dbHandler = new DBHandler(url,login,password);
+            DBHandler dbHandler = new DBHandler(URL, LOGIN, PASSWORD);
             dbHandler.registration(chatId, user);
             dbHandler.closeConnection();
         }catch (existedUserException e){
@@ -148,7 +148,7 @@ public class Bot extends TelegramLongPollingBot {
     private void sendStatisticOfTheGame(String chatId,Games game) {
         String message = null;
         StringBuilder statisticUserOfTheDay = null;
-        DBHandler dbHandler = new DBHandler(url,login,password);
+        DBHandler dbHandler = new DBHandler(URL, LOGIN, PASSWORD);
         int i=1;
         switch (game){
             case user_of_the_day:
