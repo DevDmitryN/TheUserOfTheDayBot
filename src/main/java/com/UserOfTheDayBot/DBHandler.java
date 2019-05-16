@@ -88,7 +88,7 @@ public class DBHandler {
     public List<UserForBD> getListOfPlayers(String chatId){
         List<UserForBD> players = new ArrayList<UserForBD>();
         UserForBD user;
-        String query = "select users.user_id,username,firstname,user_day_counter,pidor_counter" + " from users join chat_user on chat_id="+chatId+" where chat_user.user_id=users.user_id";
+        String query = "select users.user_id,username,firstname,user_day_counter,loser_counter" + " from users join chat_user on chat_id="+chatId+" where chat_user.user_id=users.user_id";
         try(Statement statement = connection.createStatement()){
             ResultSet usersFromBD = statement.executeQuery(query);
             while (usersFromBD.next()){
@@ -114,8 +114,9 @@ public class DBHandler {
                 counterColumn = "user_day_counter";
                 break;
             case loser_of_the_day:
-                dayColumn = "pidor_of_the_day_run_day";
-                counterColumn = "pidor_counter";
+                dayColumn = "loser_of_the_day_run_day";
+                counterColumn = "loser_counter";
+                break;
         }
         String query = "UPDATE chats SET " + column + " = \""+user.getName()+"\", " + dayColumn + " ="+dayRunning+" WHERE chat_id="+chatId;
         try(Statement statement = connection.createStatement()){
